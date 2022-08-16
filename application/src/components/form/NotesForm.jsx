@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import classes from "./NotesForm.module.css";
+import { v4 as uuidv4 } from 'uuid';
 
 const NotesForm = ({ add, ...props }) => {
   const [inputValue, setInputValue] = useState("");
@@ -11,7 +12,7 @@ const NotesForm = ({ add, ...props }) => {
     e.preventDefault();
     if (inputValue.trim().length > 0) {
       let newNote = {
-        id: new Date().toLocaleString(),
+        id: uuidv4(),
         name: inputValue,
         subnotes: []
       };

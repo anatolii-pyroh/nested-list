@@ -1,0 +1,31 @@
+{
+    "users": [
+        {
+            "name": "Anatolii Pyroh",
+            "notes": [
+                {
+                    "id": "cab27e45-ca50-4fcb-b7f9-a5a067f2ecb2",
+                    "name": "Note #1",
+                    "subnotes": [
+                        {
+                            "id": "78232441-490e-402c-9e51-7a79a5103d58",
+                            "name": "subnote #1",
+                            "subnotes": []
+                        }
+                    ]
+                },
+                {
+                    "id": "c44d73ba-b88c-4c92-b854-01044ebc4cfd",
+                    "name": "Note #2",
+                    "subnotes": [
+                        {
+                            "id": "3b3c1f9a-d731-4871-8504-de8197f9d31d",
+                            "name": "subnote #1",
+                            "subnotes": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

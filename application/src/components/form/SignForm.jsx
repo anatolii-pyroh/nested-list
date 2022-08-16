@@ -2,10 +2,11 @@ import React, { Fragment } from "react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-const SignForm = () => {
+const SignForm = ({userFunction, buttonText}) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -19,8 +20,9 @@ const SignForm = () => {
   return (
     <Fragment>
       <form
-        onSubmit={handleSubmit(() => {
-          console.log("form submit");
+        onSubmit={handleSubmit((data) => {
+          userFunction(data.email, data.password)
+          reset()
         })}
       >
         <TextField
@@ -69,7 +71,7 @@ const SignForm = () => {
           type="submit"
           sx={{ marginTop: 0, width: "100px" }}
         >
-          Log in
+          {buttonText}
         </Button>
       </form>
     </Fragment>
