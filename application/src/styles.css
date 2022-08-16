@@ -5,8 +5,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-#root {
+body {
   display: flex;
   justify-content: center;
 }
@@ -18,6 +17,10 @@
 
 .App ul {
   list-style: none;
+}
+
+.App h3 {
+  text-align: center;
 }
 
 button:focus {

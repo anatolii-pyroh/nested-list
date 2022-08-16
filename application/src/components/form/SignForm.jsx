@@ -54,6 +54,7 @@ const SignForm = ({userFunction, buttonText}) => {
               message: "Minimum length of password is 6"
             }
           })}
+          type="password"
           label="Password"
           size="small"
           variant="outlined"

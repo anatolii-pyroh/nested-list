@@ -1,8 +1,10 @@
 {
     "users": [
         {
-            "name": "Anatolii Pyroh",
-            "notes": [
+            "userId": "",
+            "userEmail": "",
+            "userPassword": "",
+            "userNotes": [
                 {
                     "id": "cab27e45-ca50-4fcb-b7f9-a5a067f2ecb2",
                     "name": "Note #1",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Card from "./components/UI/Card";
 import NotesForm from "./components/form/NotesForm";
 import NoteItem from "./components/list/NoteItem";
@@ -12,31 +12,33 @@ export default function App() {
   const localNotes = JSON.parse(localStorage.getItem("notes")) || [];
   const [notes, setNotes] = useState(localNotes);
   const [isSignedUp, setIsSignedUp] = useState(false);
-  const [isLogedIn, setIsLogedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({
-    id: "",
-    email: "",
-    password: ""
-  })
+    userId: "",
+    userEmail: "",
+    userPassword: "",
+    userNotes: notes,
+  });
 
-  const signUpUser = (email, password) => {
-    console.log(email, password)
+  const handleSignUpUser = (email, password) => {
+    console.log(email, password);
     setUser({
       id: uuidv4(),
       email: email,
-      password: password
-    })
-    setIsSignedUp(true)
-    console.log("Signed up")
-  }
-  const logInUser = (email, password) => {
+      password: password,
+    });
+    setIsSignedUp(true);
+    console.log("Signed up");
+  };
+  const handleLogInUser = (email, password) => {
     if (email === user.email && password === user.password) {
-      console.log("Loged in")
-      setIsLogedIn(true)
+      console.log("Logged in");
+      setIsLoggedIn(true);
+      localStorage.setItem("isLoggedIn", "1");
     } else {
-      console.log("Wrong inputs")
+      console.log("Wrong inputs");
     }
-  }
+  };
   // add not when user press "submit"
   const addNote = (newNote) => {
     setNotes([...notes, newNote]);
@@ -74,38 +76,65 @@ export default function App() {
   // updating localStorage every time we add or remove note from notesList
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
+    setUser((user) => {
+      const updState = {...user}
+      updState.userNotes = notes
+      return updState
+    })
   }, [notes]);
 
   useEffect(() => {
-    console.log(user)
-  }, [user])
+    console.log(user.userNotes);
+  }, [user]);
+
+  useEffect(() => {
+    const storeLogInInfo = localStorage.getItem("isLoggedIn");
+    if (storeLogInInfo === "1") {
+      setIsSignedUp(true);
+      setIsLoggedIn(true);
+    }
+  });
 
   return (
     <div className='App'>
-      <Card>
-        {!isSignedUp && <SignForm userFunction={signUpUser} buttonText={"Sign Up"}/>}
-        {(isSignedUp && !isLogedIn) && <SignForm userFunction={logInUser} buttonText={"Log In"}/>}
-        {isLogedIn && (
+      {!isSignedUp && (
+        <Card>
+          <h3>Sign up</h3>
+          <SignForm userFunction={handleSignUpUser} buttonText={"Sign Up"} />
+        </Card>
+      )}
+      {isSignedUp && !isLoggedIn && (
+        <Card>
+          <h3>Log in</h3>
+          <SignForm userFunction={handleLogInUser} buttonText={"Log In"} />
+        </Card>
+      )}
+      {isLoggedIn && (
+        <Fragment>
+          <Card>
+            <NotesForm add={addNote} />
+          </Card>
           <main>
             <ul>
               {notes.map((note, i) => (
-                <NoteItem
-                  index={i}
-                  note={note}
-                  isFirst={i !== 0 ? true : false}
-                  isLast={notes.length - 1 !== i ? true : false}
-                  move={moveNote}
-                  edit={editNote}
-                  remove={removeNote}
-                  removeSubnote={removeSubnote}
-                  key={note.id}
-                />
+                <Card>
+                  <NoteItem
+                    index={i}
+                    note={note}
+                    isFirst={i !== 0 ? true : false}
+                    isLast={notes.length - 1 !== i ? true : false}
+                    move={moveNote}
+                    edit={editNote}
+                    remove={removeNote}
+                    removeSubnote={removeSubnote}
+                    key={note.id}
+                  />
+                </Card>
               ))}
             </ul>
-            <NotesForm add={addNote} />
           </main>
-        )}
-      </Card>
+        </Fragment>
+      )}
     </div>
   );
 }
