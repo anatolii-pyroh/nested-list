@@ -18,7 +18,6 @@ const SignForm = ({userFunction, buttonText}) => {
   const inputsNotValid = errors.email?.message || errors.password?.message;
 
   return (
-    <Fragment>
       <form
         onSubmit={handleSubmit((data) => {
           userFunction(data.email, data.password)
@@ -75,7 +74,6 @@ const SignForm = ({userFunction, buttonText}) => {
           {buttonText}
         </Button>
       </form>
-    </Fragment>
   );
 };
 

@@ -13,12 +13,13 @@ export default function App() {
   const [notes, setNotes] = useState(localNotes);
   const [isSignedUp, setIsSignedUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({
-    userId: "",
-    userEmail: "",
-    userPassword: "",
-    userNotes: notes,
-  });
+  const localUser = JSON.parse(localStorage.getItem("user")) || {
+    id: "",
+    email: "",
+    password: "",
+    notes: notes,
+  };
+  const [user, setUser] = useState(localUser);
 
   const handleSignUpUser = (email, password) => {
     console.log(email, password);
@@ -35,6 +36,7 @@ export default function App() {
       console.log("Logged in");
       setIsLoggedIn(true);
       localStorage.setItem("isLoggedIn", "1");
+      localStorage.setItem("user", JSON.stringify(user));
     } else {
       console.log("Wrong inputs");
     }
@@ -77,19 +79,16 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
     setUser((user) => {
-      const updState = {...user}
-      updState.userNotes = notes
-      return updState
-    })
+      const updState = { ...user };
+      updState.notes = notes;
+      return updState;
+    });
   }, [notes]);
-
-  useEffect(() => {
-    console.log(user.userNotes);
-  }, [user]);
 
   useEffect(() => {
     const storeLogInInfo = localStorage.getItem("isLoggedIn");
     if (storeLogInInfo === "1") {
+      localStorage.setItem("user", JSON.stringify(user));
       setIsSignedUp(true);
       setIsLoggedIn(true);
     }
@@ -117,7 +116,7 @@ export default function App() {
           <main>
             <ul>
               {notes.map((note, i) => (
-                <Card>
+                <Card key={note.id} style={{ marginTop: "0", padding: "0" }}>
                   <NoteItem
                     index={i}
                     note={note}
@@ -127,7 +126,6 @@ export default function App() {
                     edit={editNote}
                     remove={removeNote}
                     removeSubnote={removeSubnote}
-                    key={note.id}
                   />
                 </Card>
               ))}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import classes from "./NoteItem.module.css";
 import Button from "react-bootstrap/Button";
 import NotesForm from "../form/NotesForm";
+import Card from "../UI/Card";
 
 const NoteItem = ({
   index,
@@ -60,14 +61,14 @@ const NoteItem = ({
   // arrow icons
   const arrowUpIcon = (
     <img
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAWElEQVRIiWNgGGSggYGBoYOWhv+HYqpbgmw41S3BZjjVLMFnOMWWEGM42ZaQYjjJlpBjOE5LGIm09D8OcYL6mYi0gGwwasGoBaMWjCQLjmARO0xNhwxeAABOCEKpuFUsyQAAAABJRU5ErkJggg=="
-      alt="arrow up"
+      src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAWElEQVRIiWNgGGSggYGBoYOWhv+HYqpbgmw41S3BZjjVLMFnOMWWEGM42ZaQYjjJlpBjOE5LGIm09D8OcYL6mYi0gGwwasGoBaMWjCQLjmARO0xNhwxeAABOCEKpuFUsyQAAAABJRU5ErkJggg=='
+      alt='arrow up'
     />
   );
   const arrowDownIcon = (
     <img
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAaElEQVRIie3VMRKAIAxE0a8e2tLxaI7DubCwQ9BN1EazM+nIPiqAvyQBuZhVWexEIHv3exFwJ4AAAvgqMHJ82Fopz00qXEOuRi73IOZyC+IuV5Db5WfIY+U1RC4fDEBi/yIXYDZd7c1sSINBMQZKefMAAAAASUVORK5CYII="
-      alt="arrow down"
+      src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAaElEQVRIie3VMRKAIAxE0a8e2tLxaI7DubCwQ9BN1EazM+nIPiqAvyQBuZhVWexEIHv3exFwJ4AAAvgqMHJ82Fopz00qXEOuRi73IOZyC+IuV5Db5WfIY+U1RC4fDEBi/yIXYDZd7c1sSINBMQZKefMAAAAASUVORK5CYII='
+      alt='arrow down'
     />
   );
 
@@ -97,21 +98,21 @@ const NoteItem = ({
               <span onClick={() => moveNote("down")}>{arrowDownIcon}</span>
             )}
             {note.subnotes && note.subnotes.length === 0 && (
-              <Button variant="primary" type="button" onClick={open}>
+              <Button variant='primary' type='button' onClick={open}>
                 Add sublist
               </Button>
             )}
             <Button
-              variant="danger"
-              type="button"
+              variant='danger'
+              type='button'
               onClick={() => remove(note.id)}
             >
               Remove
             </Button>
             {note.subnotes && note.subnotes.length > 0 && (
               <Button
-                variant="danger"
-                type="button"
+                variant='danger'
+                type='button'
                 onClick={() => removeSubnote(index)}
               >
                 Remove sublist
@@ -123,21 +124,22 @@ const NoteItem = ({
           <React.Fragment>
             <ul>
               {note.subnotes.map((subnote, index) => (
-                <NoteItem
-                  index={index}
-                  note={subnote}
-                  isFirst={index !== 0 ? true : false}
-                  isLast={
-                    note.subnotes && note.subnotes.length - 1 !== index
-                      ? true
-                      : false
-                  }
-                  move={moveSubnote}
-                  edit={editNote}
-                  remove={() => removeNote(subnote.id)}
-                  removeSubnote={() => removeSubnoteItsSubnotes(index)}
-                  key={subnote.id}
-                />
+                <Card key={subnote.id} style={{ marginTop: "0", padding: "0" }}>
+                  <NoteItem
+                    index={index}
+                    note={subnote}
+                    isFirst={index !== 0 ? true : false}
+                    isLast={
+                      note.subnotes && note.subnotes.length - 1 !== index
+                        ? true
+                        : false
+                    }
+                    move={moveSubnote}
+                    edit={editNote}
+                    remove={() => removeNote(subnote.id)}
+                    removeSubnote={() => removeSubnoteItsSubnotes(index)}
+                  />
+                </Card>
               ))}
             </ul>
             <NotesForm add={addNote} />
