@@ -1,0 +1,35 @@
+.item {
+    margin-top: 1rem;
+    padding: 1rem;
+    max-width: 100%;
+  }
+  
+  .general {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .item-name span,
+  .sublist span {
+    font-weight: bold;
+  }
+  
+  .item-buttons span,
+  .item-buttons button {
+    margin-left: 0.3rem;
+  }
+  .item-buttons span:hover {
+    cursor: pointer;
+  }
+  .sublist-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  .sublist-form button {
+    margin-top: -1rem;
+  }
+  
