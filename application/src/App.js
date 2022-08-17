@@ -5,32 +5,37 @@ import NoteItem from "./components/list/NoteItem";
 import SignForm from "./components/form/SignForm";
 import "./styles.css";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
+import api from './api/userNotes'
 
 export default function App() {
   // setting notesList data from localestorage, if empty, data = []
   const localNotes = JSON.parse(localStorage.getItem("notes")) || [];
   const [notes, setNotes] = useState(localNotes);
-  const [isSignedUp, setIsSignedUp] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const localUser = JSON.parse(localStorage.getItem("user")) || {
     id: "",
     email: "",
     password: "",
-    notes: notes,
+    notes: [],
   };
   const [user, setUser] = useState(localUser);
+  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // set user state with random id and email+password from sign form
   const handleSignUpUser = (email, password) => {
     console.log(email, password);
     setUser({
       id: uuidv4(),
       email: email,
       password: password,
+      notes: [],
     });
     setIsSignedUp(true);
     console.log("Signed up");
   };
+
+  // check if inputs from sign form are equal inputs from login form
+  // if true, set user state in local storage
   const handleLogInUser = (email, password) => {
     if (email === user.email && password === user.password) {
       console.log("Logged in");
@@ -67,7 +72,6 @@ export default function App() {
   const removeNote = (id) => {
     setNotes(notes.filter((note) => note.id !== id));
   };
-
   const removeSubnote = (index) => {
     setNotes((notes) => {
       const updState = [...notes];
@@ -75,7 +79,8 @@ export default function App() {
       return updState;
     });
   };
-  // updating localStorage every time we add or remove note from notesList
+
+  // updating localStorage notes and user state every time we CRUD notes
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
     setUser((user) => {
@@ -86,13 +91,19 @@ export default function App() {
   }, [notes]);
 
   useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+    console.log(user);
+  }, [user]);
+  
+  // if logged in, give user state info from local storage
+  useEffect(() => {
     const storeLogInInfo = localStorage.getItem("isLoggedIn");
     if (storeLogInInfo === "1") {
-      localStorage.setItem("user", JSON.stringify(user));
+      // localStorage.setItem("user", JSON.stringify(user));
       setIsSignedUp(true);
       setIsLoggedIn(true);
     }
-  });
+  }, []);
 
   return (
     <div className='App'>
