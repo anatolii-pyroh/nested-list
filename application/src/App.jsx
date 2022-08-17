@@ -3,45 +3,43 @@ import Card from "./components/UI/Card";
 import NotesForm from "./components/form/NotesForm";
 import NoteItem from "./components/list/NoteItem";
 import SignForm from "./components/form/SignForm";
-import api from "./api/users"
+import api from "./api/users";
 import "./styles.css";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
   const [isSignedUp, setIsSignedUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [notes, setNotes] = useState([]);
   const [user, setUser] = useState({
     id: "",
     email: "",
     password: "",
     notes: [],
   });
-  const [notes, setNotes] = useState([]);
-
-  // retrieve user
-  const retrieveUsers = async () => {
-    const response = await api.get("/users")
+  // recieve user
+  const recieveUsers = async () => {
+    const response = await api.get("/users");
     return response.data;
-  }
+  };
   // if true, get user its info from api and set notes its info from user.notes in api
   const getAllUsers = async () => {
-    const userApiInfo = await retrieveUsers()
-    console.log(userApiInfo)
+    const userApiInfo = await recieveUsers();
     if (userApiInfo) {
-      setUser(userApiInfo?.[0])
-      setNotes(userApiInfo?.[0].notes)
+      console.log(userApiInfo)
+      setUser(userApiInfo?.[userApiInfo.length - 1]);
+      setNotes(userApiInfo?.[userApiInfo.length - 1].notes);
     }
-  }
+  };
   // set user state with random id and email+password from sign form
   const handleSignUpUser = (email, password) => {
-    console.log(email, password);
+    setIsSignedUp(true);
     setUser({
       id: uuidv4(),
       email: email,
       password: password,
-      notes: [],
+      notes: []
     });
-    setIsSignedUp(true);
     console.log("Signed up");
   };
 
@@ -51,14 +49,13 @@ export default function App() {
     if (email === user.email && password === user.password) {
       console.log("Logged in");
       setIsLoggedIn(true);
-      localStorage.setItem("isLoggedIn", "1");
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("isLoggedIn", true);
     } else {
       console.log("Wrong inputs");
     }
   };
   // add not when user press "submit"
-  const addNote = (newNote) => {
+  const addNote = async (newNote) => {
     setNotes([...notes, newNote]);
   };
 
@@ -101,15 +98,19 @@ export default function App() {
   }, [notes]);
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-    console.log(user)
+    if ((isSignedUp && !isLoggedIn) && user.id) {
+      api.post(`/users`, user);
+    }
+    if (isLoggedIn && user.id) {
+      api.put(`/users/${user.id}`, user);
+    }
   }, [user]);
 
   // if logged in, give user state info from local storage
   useEffect(() => {
     const storeLogInInfo = localStorage.getItem("isLoggedIn");
-    if (storeLogInInfo === "1") {
-      getAllUsers()
+    if (storeLogInInfo) {
+      getAllUsers();
       setIsSignedUp(true);
       setIsLoggedIn(true);
     }

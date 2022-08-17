@@ -1,31 +1,50 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "9b344677-f7f5-4772-9349-009ea1312e57",
+      "email": "anatolii@gmail.com",
+      "password": "123456",
+      "notes": [
         {
-            "id": "da14c9b5-1296-424a-98a6-5d825c6c9357",
-            "email": "anatolii@gmail.com",
-            "password": "123456",
-            "notes": [
-                {
-                    "id": "951f9d4e-6aa8-46b1-8053-c4a273447795",
-                    "name": "note #1",
-                    "subnotes": []
-                },
-                {
-                    "id": "bc167af1-df89-4378-8483-51a9f3dfbb47",
-                    "name": "note #2",
-                    "subnotes": []
-                },
-                {
-                    "id": "c600f18b-8a07-4e27-908a-681712ef6c16",
-                    "name": "note #3",
-                    "subnotes": []
-                },
-                {
-                    "id": "69c57f73-28d7-4955-a766-cdd23f9d8c17",
-                    "name": "note #4",
-                    "subnotes": []
-                }
-            ]
+          "id": "2ff533f1-dfff-4333-bfa0-20f210cea302",
+          "name": "note #1",
+          "subnotes": []
+        },
+        {
+          "id": "628c705e-a4c1-4a96-997d-d020b6fd29ac",
+          "name": "note #2",
+          "subnotes": []
         }
-    ]
+      ]
+    },
+    {
+      "id": "4f28af8d-8120-4ec4-be01-e4db294b3f22",
+      "email": "ant@gmail.com",
+      "password": "123456",
+      "notes": [
+        {
+          "id": "9c1e4ebe-d92f-4bb1-8fb6-c4adb3267ce7",
+          "name": "note #1",
+          "subnotes": []
+        }
+      ]
+    },
+    {
+      "id": "cf1f7a24-a375-4f25-a87b-db27babdb6fb",
+      "email": "anat@gmail.com",
+      "password": "123456",
+      "notes": [
+        {
+          "id": "6405de67-4fab-4ba2-b14b-e695c3b2b56f",
+          "name": "note #1",
+          "subnotes": []
+        },
+        {
+          "id": "d0f3db3a-8f39-47fc-8254-fc58ade44086",
+          "name": "note #2",
+          "subnotes": []
+        }
+      ]
+    }
+  ]
 }
