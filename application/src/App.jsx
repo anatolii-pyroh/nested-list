@@ -3,24 +3,35 @@ import Card from "./components/UI/Card";
 import NotesForm from "./components/form/NotesForm";
 import NoteItem from "./components/list/NoteItem";
 import SignForm from "./components/form/SignForm";
+import api from "./api/users"
 import "./styles.css";
 import { v4 as uuidv4 } from "uuid";
-import api from './api/userNotes'
 
 export default function App() {
-  // setting notesList data from localestorage, if empty, data = []
-  const localNotes = JSON.parse(localStorage.getItem("notes")) || [];
-  const [notes, setNotes] = useState(localNotes);
-  const localUser = JSON.parse(localStorage.getItem("user")) || {
+  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({
     id: "",
     email: "",
     password: "",
     notes: [],
-  };
-  const [user, setUser] = useState(localUser);
-  const [isSignedUp, setIsSignedUp] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  });
+  const [notes, setNotes] = useState([]);
 
+  // retrieve user
+  const retrieveUsers = async () => {
+    const response = await api.get("/users")
+    return response.data;
+  }
+  // if true, get user its info from api and set notes its info from user.notes in api
+  const getAllUsers = async () => {
+    const userApiInfo = await retrieveUsers()
+    console.log(userApiInfo)
+    if (userApiInfo) {
+      setUser(userApiInfo?.[0])
+      setNotes(userApiInfo?.[0].notes)
+    }
+  }
   // set user state with random id and email+password from sign form
   const handleSignUpUser = (email, password) => {
     console.log(email, password);
@@ -80,9 +91,8 @@ export default function App() {
     });
   };
 
-  // updating localStorage notes and user state every time we CRUD notes
+  // updating user.notes state every time we CRUD notes
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
     setUser((user) => {
       const updState = { ...user };
       updState.notes = notes;
@@ -92,14 +102,14 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
-    console.log(user);
+    console.log(user)
   }, [user]);
-  
+
   // if logged in, give user state info from local storage
   useEffect(() => {
     const storeLogInInfo = localStorage.getItem("isLoggedIn");
     if (storeLogInInfo === "1") {
-      // localStorage.setItem("user", JSON.stringify(user));
+      getAllUsers()
       setIsSignedUp(true);
       setIsLoggedIn(true);
     }
