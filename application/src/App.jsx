@@ -59,8 +59,8 @@ export default function App() {
     setNotes([...notes, newNote]);
   };
 
-  // edit note when user add info to note
-  const editNote = (note, index) => {
+  // edit note when user add notes,subnotes or move them
+  const updateNote = (note, index) => {
     setNotes((notes) => {
       const updState = [...notes];
       updState[index] = note;
@@ -68,6 +68,14 @@ export default function App() {
     });
   };
 
+  const editNoteName = (index, newNoteName) => {
+    console.log(newNoteName)
+    setNotes((notes) => {
+      const updState = [...notes]
+      updState[index].name = newNoteName
+      return updState;
+    })
+  }
   // move note in notes when user press any arrow
   const moveNote = (currIndex, newIndex) => {
     const noteStateCopy = [...notes];
@@ -145,7 +153,8 @@ export default function App() {
                     isFirst={i !== 0 ? true : false}
                     isLast={notes.length - 1 !== i ? true : false}
                     move={moveNote}
-                    edit={editNote}
+                    update={updateNote}
+                    editName={editNoteName}
                     remove={removeNote}
                     removeSubnote={removeSubnote}
                   />

@@ -10,7 +10,8 @@ const NoteItem = ({
   isLast,
   isFirst,
   move,
-  edit,
+  update,
+  editName,
   remove,
   removeSubnote,
   ...props
@@ -33,30 +34,37 @@ const NoteItem = ({
     updSubnotes.splice(newIndex, 0, reorderedItem);
 
     const editedNote = { ...note, subnotes: updSubnotes };
-    edit(editedNote, index);
+    update(editedNote, index);
   };
 
   const addNote = (newNote) => {
     const editedNote = { ...note, subnotes: [...note.subnotes, newNote] };
-    edit(editedNote, index);
+    update(editedNote, index);
   };
 
-  const editNote = (newNote, i) => {
+  const updateNote = (newNote, i) => {
     const editedNote = { ...note };
     editedNote.subnotes[i] = newNote;
-    edit(editedNote, index);
+    update(editedNote, index);
+  };
+
+  const editSubnoteName = (i, newNoteName) => {
+    console.log(newNoteName);
+    const editedNote = { ...note }
+    editedNote.subnotes[i].name = newNoteName
+    update(editedNote, index);
   };
 
   const removeSubnoteItsSubnotes = (i) => {
     const editedNote = { ...note };
     editedNote.subnotes[i].subnotes = [];
-    edit(editedNote, index);
+    update(editedNote, index);
   };
 
   const removeNote = (id) => {
     const updSubnotes = note.subnotes.filter((subnote) => subnote.id !== id);
     const editedNote = { ...note, subnotes: updSubnotes };
-    edit(editedNote, index);
+    update(editedNote, index);
   };
   // arrow icons
   const arrowUpIcon = (
@@ -103,6 +111,13 @@ const NoteItem = ({
               </Button>
             )}
             <Button
+              variant='primary'
+              type='button'
+              onClick={() => editName(index, "newNoteName")}
+            >
+              Edit
+            </Button>
+            <Button
               variant='danger'
               type='button'
               onClick={() => remove(note.id)}
@@ -135,7 +150,8 @@ const NoteItem = ({
                         : false
                     }
                     move={moveSubnote}
-                    edit={editNote}
+                    update={updateNote}
+                    editName={() => editSubnoteName(index, "newSubnoteName")}
                     remove={() => removeNote(subnote.id)}
                     removeSubnote={() => removeSubnoteItsSubnotes(index)}
                   />

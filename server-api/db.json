@@ -35,14 +35,21 @@
       "password": "123456",
       "notes": [
         {
-          "id": "6405de67-4fab-4ba2-b14b-e695c3b2b56f",
-          "name": "note #1",
-          "subnotes": []
-        },
-        {
-          "id": "d0f3db3a-8f39-47fc-8254-fc58ade44086",
-          "name": "note #2",
-          "subnotes": []
+          "id": "a59fe258-4699-43ce-aed8-4762b59c612b",
+          "name": "newNoteName",
+          "subnotes": [
+            {
+              "id": "5ee916cd-db32-40b8-9739-6c322f2e11b3",
+              "name": "newSubnoteName",
+              "subnotes": [
+                {
+                  "id": "cd824eef-6802-4e08-8fb9-dc0910c952fa",
+                  "name": "newSubnoteName",
+                  "subnotes": []
+                }
+              ]
+            }
+          ]
         }
       ]
     }
