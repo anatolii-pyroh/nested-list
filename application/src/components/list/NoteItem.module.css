@@ -14,11 +14,7 @@
   .sublist span {
     font-weight: bold;
   }
-  
-  .item-buttons span,
-  .item-buttons button {
-    margin-left: 0.3rem;
-  }
+
   .item-buttons span:hover {
     cursor: pointer;
   }

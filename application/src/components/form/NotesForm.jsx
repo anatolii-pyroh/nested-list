@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { TextField, Button } from "@mui/material";
 import classes from "./NotesForm.module.css";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const NotesForm = ({ add, ...props }) => {
   const [inputValue, setInputValue] = useState("");
@@ -14,7 +13,7 @@ const NotesForm = ({ add, ...props }) => {
       let newNote = {
         id: uuidv4(),
         name: inputValue,
-        subnotes: []
+        subnotes: [],
       };
       add(newNote);
     }
@@ -22,20 +21,45 @@ const NotesForm = ({ add, ...props }) => {
     return;
   };
 
+  const style = {
+    mt: 0.5,
+    "& label.Mui-focused": {
+      color: "rgb(123, 76, 204)",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "rgb(123, 76, 204)",
+      },
+    },
+  };
   return (
-    <Form className={classes.form}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Add new note"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit" onClick={addNewNote}>
+    <form autocomplete='off' className={classes.form} onSubmit={addNewNote}>
+      <TextField
+        fullWidth
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        label='Add new note'
+        size='small'
+        variant='outlined'
+        sx={style}
+      />
+      <Button
+        variant='contained'
+        type='submit'
+        sx={{
+          marginTop: 1.5,
+          width: "100px",
+          color: "white !important",
+          backgroundColor: "rgb(103,46,227) !important",
+          ":hover": {
+            color: "white !important",
+            backgroundColor: "rgb(128, 84, 202) !important"
+          }
+        }}
+      >
         Submit
       </Button>
-    </Form>
+    </form>
   );
 };
 

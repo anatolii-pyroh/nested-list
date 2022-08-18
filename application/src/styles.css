@@ -6,12 +6,13 @@
   box-sizing: border-box;
 }
 body {
+  background-color: rgb(239, 238, 245);
   display: flex;
   justify-content: center;
 }
 
 .App {
-  margin-top: 1.5rem;
+  margin-top: 12rem;
   width: 700px;
 }
 
@@ -23,7 +24,21 @@ body {
   text-align: center;
 }
 
+/* button {
+  background-color: rgb(103,46,227) !important;
+} */
+
+
+button {
+  color: rgb(103,46,227) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+button:hover {
+  color: rgb(142, 107, 202) !important;
+}
+
 button:focus {
   outline: none !important;
 }
-

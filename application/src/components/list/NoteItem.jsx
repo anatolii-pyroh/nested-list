@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Box, IconButton } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import classes from "./NoteItem.module.css";
-import Button from "react-bootstrap/Button";
 import NotesForm from "../form/NotesForm";
 import Card from "../UI/Card";
 
@@ -50,8 +55,8 @@ const NoteItem = ({
 
   const editSubnoteName = (i, newNoteName) => {
     console.log(newNoteName);
-    const editedNote = { ...note }
-    editedNote.subnotes[i].name = newNoteName
+    const editedNote = { ...note };
+    editedNote.subnotes[i].name = newNoteName;
     update(editedNote, index);
   };
 
@@ -66,19 +71,7 @@ const NoteItem = ({
     const editedNote = { ...note, subnotes: updSubnotes };
     update(editedNote, index);
   };
-  // arrow icons
-  const arrowUpIcon = (
-    <img
-      src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAWElEQVRIiWNgGGSggYGBoYOWhv+HYqpbgmw41S3BZjjVLMFnOMWWEGM42ZaQYjjJlpBjOE5LGIm09D8OcYL6mYi0gGwwasGoBaMWjCQLjmARO0xNhwxeAABOCEKpuFUsyQAAAABJRU5ErkJggg=='
-      alt='arrow up'
-    />
-  );
-  const arrowDownIcon = (
-    <img
-      src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAaElEQVRIie3VMRKAIAxE0a8e2tLxaI7DubCwQ9BN1EazM+nIPiqAvyQBuZhVWexEIHv3exFwJ4AAAvgqMHJ82Fopz00qXEOuRi73IOZyC+IuV5Db5WfIY+U1RC4fDEBi/yIXYDZd7c1sSINBMQZKefMAAAAASUVORK5CYII='
-      alt='arrow down'
-    />
-  );
+
 
   useEffect(() => {
     if (note.subnotes && note.subnotes.length > 0) {
@@ -96,35 +89,58 @@ const NoteItem = ({
             {note.name}
           </div>
           <div className={classes["item-buttons"]}>
-            {/* getting item index and set icons depends on what item index is */}
-            {/* move item up */}
-            {isFirst && (
-              <span onClick={() => moveNote("up")}>{arrowUpIcon}</span>
-            )}
-            {/* move item down */}
-            {isLast && (
-              <span onClick={() => moveNote("down")}>{arrowDownIcon}</span>
-            )}
-            {note.subnotes && note.subnotes.length === 0 && (
-              <Button variant='primary' type='button' onClick={open}>
-                Add sublist
-              </Button>
-            )}
-            <Button
-              variant='primary'
-              type='button'
-              onClick={() => editName(index, "newNoteName")}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "8px",
+              }}
             >
-              Edit
-            </Button>
-            <Button
-              variant='danger'
-              type='button'
-              onClick={() => remove(note.id)}
-            >
-              Remove
-            </Button>
-            {note.subnotes && note.subnotes.length > 0 && (
+              {/* getting item index and set icons depends on what item index is */}
+              {/* move item up */}
+              {isFirst && (
+                <IconButton
+                aria-label='edit'
+                sx={{ color: "white" }}
+                onClick={() => moveNote("up")}
+              >
+                <ArrowUpwardIcon />
+              </IconButton>
+              )}
+              {/* move item down */}
+              {isLast && (
+                <IconButton
+                aria-label='edit'
+                sx={{ color: "white" }}
+                onClick={() => moveNote("down")}
+              >
+                <ArrowDownwardIcon />
+              </IconButton>
+              )}
+              {note.subnotes && note.subnotes.length === 0 && (
+                <IconButton
+                  aria-label='edit'
+                  sx={{ color: "white" }}
+                  onClick={open}
+                >
+                  <AddIcon />
+                </IconButton>
+              )}
+              <IconButton
+                aria-label='edit'
+                sx={{ color: "white" }}
+                onClick={() => editName(index, "newNoteName")}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                aria-label='delete'
+                sx={{ color: "white" }}
+                onClick={() => remove(note.id)}
+              >
+                <DeleteForeverIcon />
+              </IconButton>
+              {/* {note.subnotes && note.subnotes.length > 0 && (
               <Button
                 variant='danger'
                 type='button'
@@ -132,7 +148,8 @@ const NoteItem = ({
               >
                 Remove sublist
               </Button>
-            )}
+            )} */}
+            </Box>
           </div>
         </div>
         {isOpen && (

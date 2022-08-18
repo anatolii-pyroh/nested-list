@@ -1,55 +1,25 @@
 {
   "users": [
     {
-      "id": "9b344677-f7f5-4772-9349-009ea1312e57",
+      "id": "f058f000-240f-4b24-88b7-1bf371be93e9",
       "email": "anatolii@gmail.com",
       "password": "123456",
       "notes": [
         {
-          "id": "2ff533f1-dfff-4333-bfa0-20f210cea302",
+          "id": "bbcd783e-0a5b-47bc-b208-8b8681ed4dfa",
           "name": "note #1",
-          "subnotes": []
-        },
-        {
-          "id": "628c705e-a4c1-4a96-997d-d020b6fd29ac",
-          "name": "note #2",
-          "subnotes": []
-        }
-      ]
-    },
-    {
-      "id": "4f28af8d-8120-4ec4-be01-e4db294b3f22",
-      "email": "ant@gmail.com",
-      "password": "123456",
-      "notes": [
-        {
-          "id": "9c1e4ebe-d92f-4bb1-8fb6-c4adb3267ce7",
-          "name": "note #1",
-          "subnotes": []
-        }
-      ]
-    },
-    {
-      "id": "cf1f7a24-a375-4f25-a87b-db27babdb6fb",
-      "email": "anat@gmail.com",
-      "password": "123456",
-      "notes": [
-        {
-          "id": "a59fe258-4699-43ce-aed8-4762b59c612b",
-          "name": "newNoteName",
           "subnotes": [
             {
-              "id": "5ee916cd-db32-40b8-9739-6c322f2e11b3",
-              "name": "newSubnoteName",
-              "subnotes": [
-                {
-                  "id": "cd824eef-6802-4e08-8fb9-dc0910c952fa",
-                  "name": "newSubnoteName",
-                  "subnotes": []
-                }
-              ]
+              "id": "8a8e54df-941c-456b-a4b6-c0474c940aa0",
+              "name": "subnote #1",
+              "subnotes": []
             }
           ]
+        },
+        {
+          "id": "a68e6f3b-c06b-45a3-8d68-7a80ddaf3090",
+          "name": "note #2",
+          "subnotes": []
         }
       ]
     }
