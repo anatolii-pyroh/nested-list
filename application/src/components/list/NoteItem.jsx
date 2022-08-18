@@ -3,8 +3,10 @@ import { Box, IconButton } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import classes from "./NoteItem.module.css";
 import NotesForm from "../form/NotesForm";
 import Card from "../UI/Card";
@@ -72,7 +74,6 @@ const NoteItem = ({
     update(editedNote, index);
   };
 
-
   useEffect(() => {
     if (note.subnotes && note.subnotes.length > 0) {
       setisOpen(true);
@@ -100,32 +101,32 @@ const NoteItem = ({
               {/* move item up */}
               {isFirst && (
                 <IconButton
-                aria-label='edit'
-                sx={{ color: "white" }}
-                onClick={() => moveNote("up")}
-              >
-                <ArrowUpwardIcon />
-              </IconButton>
+                  aria-label='edit'
+                  sx={{ color: "white" }}
+                  onClick={() => moveNote("up")}
+                >
+                  <ArrowUpwardIcon />
+                </IconButton>
               )}
               {/* move item down */}
               {isLast && (
                 <IconButton
-                aria-label='edit'
-                sx={{ color: "white" }}
-                onClick={() => moveNote("down")}
-              >
-                <ArrowDownwardIcon />
-              </IconButton>
-              )}
-              {note.subnotes && note.subnotes.length === 0 && (
-                <IconButton
                   aria-label='edit'
                   sx={{ color: "white" }}
-                  onClick={open}
+                  onClick={() => moveNote("down")}
                 >
-                  <AddIcon />
+                  <ArrowDownwardIcon />
                 </IconButton>
               )}
+
+              <IconButton
+                aria-label='edit'
+                sx={{ color: "white" }}
+                onClick={open}
+              >
+                <AddIcon />
+              </IconButton>
+
               <IconButton
                 aria-label='edit'
                 sx={{ color: "white" }}
@@ -154,9 +155,10 @@ const NoteItem = ({
         </div>
         {isOpen && (
           <React.Fragment>
+            <NotesForm add={addNote} />
             <ul>
               {note.subnotes.map((subnote, index) => (
-                <Card key={subnote.id} style={{ marginTop: "0", padding: "0" }}>
+                <Card key={subnote.id} style={{ padding: "0" }}>
                   <NoteItem
                     index={index}
                     note={subnote}
@@ -175,7 +177,6 @@ const NoteItem = ({
                 </Card>
               ))}
             </ul>
-            <NotesForm add={addNote} />
           </React.Fragment>
         )}
       </li>

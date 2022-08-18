@@ -51,7 +51,7 @@ const SignForm = ({ userFunction, buttonText }) => {
         variant='outlined'
         sx={style}
       />
-      <Typography color='red' variant='body2' gutterBottom>
+      <Typography color='red' variant='body2' gutterBottom sx={{textAlign: "start", ml: 1}}>
         {errors.email?.message}
       </Typography>
       <TextField
@@ -69,7 +69,7 @@ const SignForm = ({ userFunction, buttonText }) => {
         variant='outlined'
         sx={style}
       />
-      <Typography color='red' variant='body2' gutterBottom>
+      <Typography color='red' variant='body2' gutterBottom sx={{textAlign: "start", ml: 1}}>
         {errors.password?.message}
       </Typography>
       <Button
@@ -78,7 +78,13 @@ const SignForm = ({ userFunction, buttonText }) => {
         type='submit'
         sx={{
           marginTop: 0,
-          width: "100px"
+          width: "100px",
+          color: "white !important",
+          backgroundColor: "rgb(103,46,227) !important",
+          ":hover": {
+            color: "white !important",
+            backgroundColor: "rgb(128, 84, 202) !important"
+          }
         }}
       >
         {buttonText}

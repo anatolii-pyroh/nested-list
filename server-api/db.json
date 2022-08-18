@@ -1,27 +1,4 @@
 {
   "users": [
-    {
-      "id": "f058f000-240f-4b24-88b7-1bf371be93e9",
-      "email": "anatolii@gmail.com",
-      "password": "123456",
-      "notes": [
-        {
-          "id": "bbcd783e-0a5b-47bc-b208-8b8681ed4dfa",
-          "name": "note #1",
-          "subnotes": [
-            {
-              "id": "8a8e54df-941c-456b-a4b6-c0474c940aa0",
-              "name": "subnote #1",
-              "subnotes": []
-            }
-          ]
-        },
-        {
-          "id": "a68e6f3b-c06b-45a3-8d68-7a80ddaf3090",
-          "name": "note #2",
-          "subnotes": []
-        }
-      ]
-    }
   ]
 }

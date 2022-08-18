@@ -48,6 +48,7 @@ const NotesForm = ({ add, ...props }) => {
         type='submit'
         sx={{
           marginTop: 1.5,
+          marginBottom: 1,
           width: "100px",
           color: "white !important",
           backgroundColor: "rgb(103,46,227) !important",

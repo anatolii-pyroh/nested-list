@@ -42,3 +42,7 @@ button:hover {
 button:focus {
   outline: none !important;
 }
+
+button:disabled {
+  background-color: #ccc !important;
+}
