@@ -3,9 +3,15 @@ import Card from "./components/UI/Card";
 import NotesForm from "./components/form/NotesForm";
 import NoteItem from "./components/list/NoteItem";
 import SignForm from "./components/form/SignForm";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import api from "./api/users";
 import "./styles.css";
 import { v4 as uuidv4 } from "uuid";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+});
 
 export default function App() {
   const [isSignedUp, setIsSignedUp] = useState(false);
@@ -17,7 +23,14 @@ export default function App() {
     password: "",
     notes: [],
   });
-  // recieve user
+  const [alertState, setAlertState] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const { vertical, horizontal, open } = alertState;
+
+  // recieve user info from api
   const recieveUsers = async () => {
     const response = await api.get("/users");
     return response.data;
@@ -26,7 +39,7 @@ export default function App() {
   const getAllUsers = async () => {
     const userApiInfo = await recieveUsers();
     if (userApiInfo) {
-      console.log(userApiInfo)
+      console.log(userApiInfo);
       setUser(userApiInfo?.[userApiInfo.length - 1]);
       setNotes(userApiInfo?.[userApiInfo.length - 1].notes);
     }
@@ -38,7 +51,11 @@ export default function App() {
       id: uuidv4(),
       email: email,
       password: password,
-      notes: []
+      notes: [],
+    });
+    handleClick({
+      vertical: "top",
+      horizontal: "center",
     });
     console.log("Signed up");
   };
@@ -69,13 +86,13 @@ export default function App() {
   };
 
   const editNoteName = (index, newNoteName) => {
-    console.log(newNoteName)
+    console.log(newNoteName);
     setNotes((notes) => {
-      const updState = [...notes]
-      updState[index].name = newNoteName
+      const updState = [...notes];
+      updState[index].name = newNoteName;
       return updState;
-    })
-  }
+    });
+  };
   // move note in notes when user press any arrow
   const moveNote = (currIndex, newIndex) => {
     const noteStateCopy = [...notes];
@@ -96,6 +113,14 @@ export default function App() {
     });
   };
 
+  // successfull alert
+  const handleClick = (newAlertState) => {
+    setAlertState({ open: true, ...newAlertState });
+  };
+  const handleClose = () => {
+    setAlertState({ ...alertState, open: false });
+  };
+
   // updating user.notes state every time we CRUD notes
   useEffect(() => {
     setUser((user) => {
@@ -106,7 +131,7 @@ export default function App() {
   }, [notes]);
 
   useEffect(() => {
-    if ((isSignedUp && !isLoggedIn) && user.id) {
+    if (isSignedUp && !isLoggedIn && user.id) {
       api.post(`/users`, user);
     }
     if (isLoggedIn && user.id) {
@@ -164,6 +189,20 @@ export default function App() {
           </main>
         </Fragment>
       )}
+      {/* success sign up alert */}
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        message='Sign up success!'
+        onClose={handleClose}
+        key={vertical + horizontal}
+        autoHideDuration={3000}
+        ContentProps={{
+          sx: {
+            background: "rgb(46,125,50)",
+          },
+        }}
+      />
     </div>
   );
 }

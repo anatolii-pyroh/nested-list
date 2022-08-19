@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
+
 
 const SignForm = ({ userFunction, buttonText }) => {
   const {
@@ -16,7 +17,7 @@ const SignForm = ({ userFunction, buttonText }) => {
   });
 
   const style = {
-    my: 0.5,
+    my: 0.3,
     "& label.Mui-focused": {
       color: "rgb(123, 76, 204)"
     },
@@ -51,7 +52,7 @@ const SignForm = ({ userFunction, buttonText }) => {
         variant='outlined'
         sx={style}
       />
-      <Typography color='red' variant='body2' gutterBottom sx={{textAlign: "start", ml: 1}}>
+      <Typography color='red' variant='body2' gutterBottom sx={{textAlign: "start", ml: 0.5}}>
         {errors.email?.message}
       </Typography>
       <TextField
@@ -69,7 +70,7 @@ const SignForm = ({ userFunction, buttonText }) => {
         variant='outlined'
         sx={style}
       />
-      <Typography color='red' variant='body2' gutterBottom sx={{textAlign: "start", ml: 1}}>
+      <Typography color='red' variant='body2' gutterBottom sx={{textAlign: "start", ml: 0.5}}>
         {errors.password?.message}
       </Typography>
       <Button
@@ -77,7 +78,7 @@ const SignForm = ({ userFunction, buttonText }) => {
         variant='contained'
         type='submit'
         sx={{
-          marginTop: 0,
+          marginTop: 1,
           width: "100px",
           color: "white !important",
           backgroundColor: "rgb(103,46,227) !important",

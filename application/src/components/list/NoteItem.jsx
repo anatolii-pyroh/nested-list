@@ -86,8 +86,7 @@ const NoteItem = ({
         {/* div that contains item name and buttons */}
         <div className={classes.general}>
           <div className={classes["item-name"]}>
-            <span>{index + 1}. </span>
-            {note.name}
+           <span>{index + 1}. </span>{note.name}
           </div>
           <div className={classes["item-buttons"]}>
             <Box
