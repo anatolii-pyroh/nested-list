@@ -7,7 +7,6 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import NotesIcon from "@mui/icons-material/Notes";
 import classes from "./NoteItem.module.css";
 import NotesForm from "../form/NotesForm";
 import Card from "../UI/Card";
@@ -123,23 +122,27 @@ const NoteItem = ({
                     <ArrowDownwardIcon />
                   </IconButton>
                 )}
-                 {note.subnotes.length > 0 && (
-                <IconButton aria-label='notes'>
-                  <Badge color='secondary' badgeContent={note.subnotes.length}>
-                    <NotesIcon />
-                  </Badge>
-                </IconButton>)}
                 {/* show/hide subnotes */}
                 {note.subnotes.length > 0 && (
                   <React.Fragment>
                     {!showSubnotes && (
                       <IconButton aria-label='show' onClick={show}>
-                        <VisibilityIcon />
+                        <Badge
+                          color='secondary'
+                          badgeContent={note.subnotes.length}
+                        >
+                          <VisibilityIcon />
+                        </Badge>
                       </IconButton>
                     )}
                     {showSubnotes && (
                       <IconButton aria-label='show' onClick={show}>
-                        <VisibilityOffIcon />
+                        <Badge
+                          color='secondary'
+                          badgeContent={note.subnotes.length}
+                        >
+                          <VisibilityOffIcon />
+                        </Badge>
                       </IconButton>
                     )}
                   </React.Fragment>
