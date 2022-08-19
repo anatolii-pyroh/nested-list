@@ -1,5 +1,61 @@
 {
   "users": [
-    
+    {
+      "id": "66ac69d5-5461-4e8b-98b7-e3b17fce2062",
+      "email": "anatolii@gmail.com",
+      "password": "123456",
+      "notes": [
+        {
+          "id": "fc56802c-5f74-4d25-b648-00ad8d77fc13",
+          "name": "note #1",
+          "subnotes": [
+            {
+              "id": "bf4b6bb0-4345-4fba-b3b2-91501c508f51",
+              "name": "subnote #1",
+              "subnotes": []
+            },
+            {
+              "id": "75e872bb-4e76-4a62-b835-6052c85f0856",
+              "name": "subnote #2",
+              "subnotes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2faf88bf-5e1d-4261-be06-381f46f23333",
+      "email": "anatolii@gmail.com",
+      "password": "123456",
+      "notes": [
+        {
+          "id": "704536e2-34bc-4504-99c8-be66020b5fd7",
+          "name": "note #1",
+          "subnotes": [
+            {
+              "id": "128ada60-9a64-4503-a60a-b1c80c5e19d0",
+              "name": "subnote #1",
+              "subnotes": []
+            }
+          ]
+        },
+        {
+          "id": "947718d6-9963-4dd3-a407-3926cbd5d495",
+          "name": "note #2",
+          "subnotes": [
+            {
+              "id": "fd99656f-a727-4a66-ac49-e206f782e7ed",
+              "name": "subnote #1",
+              "subnotes": []
+            }
+          ]
+        },
+        {
+          "id": "644570dd-8a32-4d31-a8d2-21718e741b1c",
+          "name": "note #3",
+          "subnotes": []
+        }
+      ]
+    }
   ]
 }

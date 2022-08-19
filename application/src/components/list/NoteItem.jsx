@@ -5,8 +5,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+//
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import classes from "./NoteItem.module.css";
 import NotesForm from "../form/NotesForm";
 import Card from "../UI/Card";
@@ -23,9 +24,13 @@ const NoteItem = ({
   removeSubnote,
   ...props
 }) => {
-  const [isOpen, setisOpen] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
+  const [showSubnotes, setShowSubnotes] = useState(false);
   const open = () => {
-    setisOpen(!isOpen);
+    setOpenForm(!openForm);
+  };
+  const show = () => {
+    setShowSubnotes(!showSubnotes);
   };
   const moveNote = (type) => {
     if (type === "up") {
@@ -76,7 +81,7 @@ const NoteItem = ({
 
   useEffect(() => {
     if (note.subnotes && note.subnotes.length > 0) {
-      setisOpen(true);
+      setOpenForm(true);
     }
   }, []);
 
@@ -86,40 +91,49 @@ const NoteItem = ({
         {/* div that contains item name and buttons */}
         <div className={classes.general}>
           <div className={classes["item-name"]}>
-           <span>{index + 1}. </span>{note.name}
+            <span>{index + 1}. </span>
+            {note.name}
           </div>
           <div className={classes["item-buttons"]}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                gap: "8px",
+                gap: "10px",
               }}
             >
               {/* getting item index and set icons depends on what item index is */}
               {/* move item up */}
               {isFirst && (
-                <IconButton
-                  aria-label='edit'
-                  onClick={() => moveNote("up")}
-                >
+                <IconButton aria-label='moveUp' onClick={() => moveNote("up")}>
                   <ArrowUpwardIcon />
                 </IconButton>
               )}
               {/* move item down */}
               {isLast && (
                 <IconButton
-                  aria-label='edit'
+                  aria-label='moveDown'
                   onClick={() => moveNote("down")}
                 >
                   <ArrowDownwardIcon />
                 </IconButton>
               )}
-
-              <IconButton
-                aria-label='edit'
-                onClick={open}
-              >
+              {/* show/hide subnotes */}
+              {note.subnotes.length > 0 && (
+                <React.Fragment>
+                  {!showSubnotes && (
+                    <IconButton aria-label='show' onClick={show}>
+                      <VisibilityIcon />
+                    </IconButton>
+                  )}
+                  {showSubnotes && (
+                    <IconButton aria-label='show' onClick={show}>
+                      <VisibilityOffIcon />
+                    </IconButton>
+                  )}
+                </React.Fragment>
+              )}
+              <IconButton aria-label='add' onClick={open}>
                 <AddIcon />
               </IconButton>
 
@@ -129,10 +143,7 @@ const NoteItem = ({
               >
                 <EditIcon />
               </IconButton>
-              <IconButton
-                aria-label='delete'
-                onClick={() => remove(note.id)}
-              >
+              <IconButton aria-label='delete' onClick={() => remove(note.id)}>
                 <DeleteForeverIcon />
               </IconButton>
               {/* {note.subnotes && note.subnotes.length > 0 && (
@@ -147,9 +158,9 @@ const NoteItem = ({
             </Box>
           </div>
         </div>
-        {isOpen && (
+        {openForm && <NotesForm add={addNote} />}
+        {showSubnotes && (
           <React.Fragment>
-            <NotesForm add={addNote} />
             <ul>
               {note.subnotes.map((subnote, index) => (
                 <Card key={subnote.id} style={{ padding: "0" }}>

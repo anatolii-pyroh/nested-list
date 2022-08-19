@@ -24,6 +24,7 @@ export default function App() {
     password: "",
     notes: [],
   });
+  // states for alert message when user sign up
   const [alertState, setAlertState] = useState({
     open: false,
     vertical: "top",
@@ -72,11 +73,11 @@ export default function App() {
       console.log("Wrong inputs");
     }
   };
-
   const handleLogOutUser = () => {
     setIsLoggedIn(false)
-    localStorage.setItem("isLoggedIn", false);
+    localStorage.removeItem("isLoggedIn");
   }
+
   // add not when user press "submit"
   const addNote = async (newNote) => {
     setNotes([...notes, newNote]);
@@ -90,7 +91,6 @@ export default function App() {
       return updState;
     });
   };
-
   const editNoteName = (index, newNoteName) => {
     console.log(newNoteName);
     setNotes((notes) => {
@@ -99,6 +99,7 @@ export default function App() {
       return updState;
     });
   };
+
   // move note in notes when user press any arrow
   const moveNote = (currIndex, newIndex) => {
     const noteStateCopy = [...notes];
@@ -119,7 +120,7 @@ export default function App() {
     });
   };
 
-  // successfull alert
+  // successfull alert show and hide
   const handleClick = (newAlertState) => {
     setAlertState({ open: true, ...newAlertState });
   };
@@ -148,7 +149,7 @@ export default function App() {
   // if logged in, give user state info from local storage
   useEffect(() => {
     const storeLogInInfo = localStorage.getItem("isLoggedIn");
-    if (storeLogInInfo === true) {
+    if (storeLogInInfo) {
       getAllUsers();
       setIsSignedUp(true);
       setIsLoggedIn(true);
@@ -161,13 +162,13 @@ export default function App() {
   return (
     <div className='App'>
       {!isSignedUp && (
-        <Card style={{width: "500px"}}>
+        <Card style={{width: "500px", alignSelf: "center"}}>
           <h3>Create an account</h3>
           <SignForm userFunction={handleSignUpUser} buttonText={"Sign Up"} signUp={true}/>
         </Card>
       )}
       {isSignedUp && !isLoggedIn && (
-        <Card style={{width: "500px"}}>
+        <Card style={{width: "500px", alignSelf: "center"}}>
           <h3>Log in</h3>
           <SignForm userFunction={handleLogInUser} buttonText={"Log In"} signUp={false}/>
         </Card>

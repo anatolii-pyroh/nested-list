@@ -78,7 +78,7 @@ const SignForm = ({ userFunction, buttonText, signUp }) => {
         variant='contained'
         type='submit'
         sx={{
-          marginTop: 1,
+          my: 1,
           width: "100%",
           color: "white !important",
           backgroundColor: "rgb(103,46,227) !important",
