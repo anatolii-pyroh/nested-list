@@ -6,15 +6,9 @@
       "password": "123456",
       "notes": [
         {
-          "id": "660943b9-42e5-4ff2-acac-8391357b405a",
-          "name": "123",
-          "subnotes": [
-            {
-              "id": "495c8569-68d4-43fc-9786-b3456f15c8af",
-              "name": "321222",
-              "subnotes": []
-            }
-          ]
+          "id": "fb7aac1a-7ca8-4d7e-ab24-816934c84423",
+          "name": "note #1",
+          "subnotes": []
         }
       ]
     }

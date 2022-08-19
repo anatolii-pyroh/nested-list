@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, IconButton, Button } from "@mui/material";
+import { Box, IconButton, Button, Badge } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,6 +7,7 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import NotesIcon from "@mui/icons-material/Notes";
 import classes from "./NoteItem.module.css";
 import NotesForm from "../form/NotesForm";
 import Card from "../UI/Card";
@@ -22,7 +23,6 @@ const NoteItem = ({
   editName,
   remove,
   removeSubnote,
-  ...props
 }) => {
   // state for modal window
   const [openModal, setOpenModal] = useState(false);
@@ -86,7 +86,6 @@ const NoteItem = ({
     update(editedNote, index);
   };
 
-
   return (
     <React.Fragment>
       <li className={classes.item}>
@@ -124,6 +123,12 @@ const NoteItem = ({
                     <ArrowDownwardIcon />
                   </IconButton>
                 )}
+                 {note.subnotes.length > 0 && (
+                <IconButton aria-label='notes'>
+                  <Badge color='secondary' badgeContent={note.subnotes.length}>
+                    <NotesIcon />
+                  </Badge>
+                </IconButton>)}
                 {/* show/hide subnotes */}
                 {note.subnotes.length > 0 && (
                   <React.Fragment>
@@ -143,10 +148,7 @@ const NoteItem = ({
                   <AddIcon />
                 </IconButton>
 
-                <IconButton
-                  aria-label='edit'
-                  onClick={handleOpen}
-                >
+                <IconButton aria-label='edit' onClick={handleOpen}>
                   <EditIcon />
                 </IconButton>
                 <IconButton aria-label='delete' onClick={() => remove(note.id)}>
@@ -187,9 +189,13 @@ const NoteItem = ({
           </ul>
         </React.Fragment>
       )}
-
       {/* modal window when edit item name*/}
-      <ModalWindow openModal={openModal} handleClose={handleClose} edit={editName} index={index}/>
+      <ModalWindow
+        openModal={openModal}
+        handleClose={handleClose}
+        edit={editName}
+        index={index}
+      />
     </React.Fragment>
   );
 };

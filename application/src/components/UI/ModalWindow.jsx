@@ -8,19 +8,20 @@ import {
   Button,
 } from "@mui/material";
 
-const ModalWindow = ({openModal, handleClose, edit, index}) => {
-    const [modalValue, setModalValue] = useState("");
-   const handleSendNewNoteName = () => {
-        edit(index, modalValue)
-        handleClose()
-    }
-// modal window and input styles
+const ModalWindow = ({ openModal, handleClose, edit, index }) => {
+  const [modalValue, setModalValue] = useState("");
+  const handleSendNewNoteName = () => {
+    edit(index, modalValue);
+    handleClose();
+  };
+  // modal window and input styles
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 500,
+    maxWidth: "100%",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -55,6 +56,7 @@ const ModalWindow = ({openModal, handleClose, edit, index}) => {
           Enter new name of note
         </Typography>
         <TextField
+        autoComplete="off"
           fullWidth
           label='Name'
           size='small'

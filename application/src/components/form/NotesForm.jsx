@@ -3,7 +3,7 @@ import { TextField, Button } from "@mui/material";
 import classes from "./NotesForm.module.css";
 import { v4 as uuidv4 } from "uuid";
 
-const NotesForm = ({ add, ...props }) => {
+const NotesForm = ({ add }) => {
   const [inputValue, setInputValue] = useState("");
 
   // add new note by checking if input is not empty
