@@ -82,6 +82,7 @@ const NoteItem = ({
   return (
     <React.Fragment>
       <li className={classes.item}>
+        <Card>
         {/* div that contains item name and buttons */}
         <div className={classes.general}>
           <div className={classes["item-name"]}>
@@ -156,8 +157,8 @@ const NoteItem = ({
           <React.Fragment>
             <ul>
               {note.subnotes.map((subnote, index) => (
-                <Card key={subnote.id} style={{ padding: "0" }}>
                   <NoteItem
+                  key={subnote.id}
                     index={index}
                     note={subnote}
                     isFirst={index !== 0 ? true : false}
@@ -172,11 +173,11 @@ const NoteItem = ({
                     remove={() => removeNote(subnote.id)}
                     removeSubnote={() => removeSubnoteItsSubnotes(index)}
                   />
-                </Card>
               ))}
             </ul>
           </React.Fragment>
         )}
+        </Card>
       </li>
     </React.Fragment>
   );

@@ -177,8 +177,8 @@ export default function App() {
           <main>
             <ul>
               {notes.map((note, i) => (
-                <Card key={note.id} style={{ marginTop: "0", padding: "0" }}>
                   <NoteItem
+                  key={note.id}
                     index={i}
                     note={note}
                     isFirst={i !== 0 ? true : false}
@@ -189,7 +189,6 @@ export default function App() {
                     remove={removeNote}
                     removeSubnote={removeSubnote}
                   />
-                </Card>
               ))}
             </ul>
           </main>
