@@ -4,15 +4,10 @@ import NotesForm from "./components/form/NotesForm";
 import NoteItem from "./components/list/NoteItem";
 import SignForm from "./components/form/SignForm";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import api from "./api/users";
 import "./styles.css";
 import { v4 as uuidv4 } from "uuid";
 import Header from "./components/UI/Header";
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
-});
 
 export default function App() {
   const [isSignedUp, setIsSignedUp] = useState(false);
@@ -176,8 +171,8 @@ export default function App() {
       {isLoggedIn && (
         <Fragment>
           <Header user={user} logout={handleLogOutUser}/>
-          <Card>
-            <NotesForm add={addNote} />
+          <Card style={{width: "400px", alignSelf: "center"}}>
+            <NotesForm add={addNote}/>
           </Card>
           <main>
             <ul>

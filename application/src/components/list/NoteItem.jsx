@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Box, IconButton } from "@mui/material";
+import React, { useState } from "react";
+import { Box, IconButton, Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-//
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import classes from "./NoteItem.module.css";
@@ -79,11 +78,6 @@ const NoteItem = ({
     update(editedNote, index);
   };
 
-  useEffect(() => {
-    if (note.subnotes && note.subnotes.length > 0) {
-      setOpenForm(true);
-    }
-  }, []);
 
   return (
     <React.Fragment>
@@ -146,15 +140,14 @@ const NoteItem = ({
               <IconButton aria-label='delete' onClick={() => remove(note.id)}>
                 <DeleteForeverIcon />
               </IconButton>
-              {/* {note.subnotes && note.subnotes.length > 0 && (
+              {note.subnotes && note.subnotes.length > 0 && (
               <Button
-                variant='danger'
                 type='button'
                 onClick={() => removeSubnote(index)}
               >
-                Remove sublist
+                Remove subnotes
               </Button>
-            )} */}
+            )}
             </Box>
           </div>
         </div>

@@ -92,8 +92,8 @@ const SignForm = ({ userFunction, buttonText, signUp }) => {
       </Button>
       {signUp && 
       <div className={classes["privacy_text"]}>
-      <p>By clicking "Sign Up", you agree to our <a href="#">Terms</a> and 
-      have read and acknowledge our <a href="#">Global Privacy Statement</a></p>
+      <p>By clicking "Sign Up", you agree to our <a href="/">Terms</a> and 
+      have read and acknowledge our <a href="/">Global Privacy Statement</a></p>
       </div>
       }
     </form>
