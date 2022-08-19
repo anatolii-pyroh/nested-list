@@ -171,9 +171,7 @@ export default function App() {
       {isLoggedIn && (
         <Fragment>
           <Header user={user} logout={handleLogOutUser}/>
-          <Card style={{width: "400px", alignSelf: "center"}}>
             <NotesForm add={addNote}/>
-          </Card>
           <main>
             <ul>
               {notes.map((note, i) => (

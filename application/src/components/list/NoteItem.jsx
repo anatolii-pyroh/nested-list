@@ -137,12 +137,7 @@ const NoteItem = ({
                     )}
                     {showSubnotes && (
                       <IconButton aria-label='show' onClick={show}>
-                        <Badge
-                          color='secondary'
-                          badgeContent={note.subnotes.length}
-                        >
-                          <VisibilityOffIcon />
-                        </Badge>
+                        <VisibilityOffIcon />
                       </IconButton>
                     )}
                   </React.Fragment>
