@@ -1,0 +1,11 @@
+.privacy_text {
+    margin-top: 1.5rem;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: rgb(184, 182, 182);
+}
+
+.privacy_text span {
+    color: rgb(103,46,227);
+}

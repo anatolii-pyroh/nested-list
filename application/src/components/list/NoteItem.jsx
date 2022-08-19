@@ -101,7 +101,6 @@ const NoteItem = ({
               {isFirst && (
                 <IconButton
                   aria-label='edit'
-                  sx={{ color: "white" }}
                   onClick={() => moveNote("up")}
                 >
                   <ArrowUpwardIcon />
@@ -111,7 +110,6 @@ const NoteItem = ({
               {isLast && (
                 <IconButton
                   aria-label='edit'
-                  sx={{ color: "white" }}
                   onClick={() => moveNote("down")}
                 >
                   <ArrowDownwardIcon />
@@ -120,7 +118,6 @@ const NoteItem = ({
 
               <IconButton
                 aria-label='edit'
-                sx={{ color: "white" }}
                 onClick={open}
               >
                 <AddIcon />
@@ -128,14 +125,12 @@ const NoteItem = ({
 
               <IconButton
                 aria-label='edit'
-                sx={{ color: "white" }}
                 onClick={() => editName(index, "newNoteName")}
               >
                 <EditIcon />
               </IconButton>
               <IconButton
                 aria-label='delete'
-                sx={{ color: "white" }}
                 onClick={() => remove(note.id)}
               >
                 <DeleteForeverIcon />

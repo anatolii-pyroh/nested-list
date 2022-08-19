@@ -1,16 +1,5 @@
 {
   "users": [
-    {
-      "id": "50a89ba5-51f8-4e52-8c9a-e924ac7d44dd",
-      "email": "anatolii@gmail.com",
-      "password": "123456",
-      "notes": []
-    },
-    {
-      "id": "c5360bfc-0ee4-4d52-b6d0-94a04db28bea",
-      "email": "anatolii@gmail.com",
-      "password": "123456",
-      "notes": []
-    }
+    
   ]
 }

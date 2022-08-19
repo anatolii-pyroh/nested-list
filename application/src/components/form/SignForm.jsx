@@ -1,9 +1,9 @@
 import React from "react";
 import { TextField, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
+import classes from './SignForm.module.css'
 
-
-const SignForm = ({ userFunction, buttonText }) => {
+const SignForm = ({ userFunction, buttonText, signUp }) => {
   const {
     register,
     handleSubmit,
@@ -79,7 +79,7 @@ const SignForm = ({ userFunction, buttonText }) => {
         type='submit'
         sx={{
           marginTop: 1,
-          width: "100px",
+          width: "100%",
           color: "white !important",
           backgroundColor: "rgb(103,46,227) !important",
           ":hover": {
@@ -90,6 +90,12 @@ const SignForm = ({ userFunction, buttonText }) => {
       >
         {buttonText}
       </Button>
+      {signUp && 
+      <div className={classes["privacy_text"]}>
+      <p>By clicking "Sign Up", you agree to our <a href="#">Terms</a> and 
+      have read and acknowledge our <a href="#">Global Privacy Statement</a></p>
+      </div>
+      }
     </form>
   );
 };

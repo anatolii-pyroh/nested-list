@@ -8,6 +8,7 @@ import MuiAlert from "@mui/material/Alert";
 import api from "./api/users";
 import "./styles.css";
 import { v4 as uuidv4 } from "uuid";
+import Header from "./components/UI/Header";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
@@ -71,6 +72,11 @@ export default function App() {
       console.log("Wrong inputs");
     }
   };
+
+  const handleLogOutUser = () => {
+    setIsLoggedIn(false)
+    localStorage.setItem("isLoggedIn", false);
+  }
   // add not when user press "submit"
   const addNote = async (newNote) => {
     setNotes([...notes, newNote]);
@@ -142,29 +148,33 @@ export default function App() {
   // if logged in, give user state info from local storage
   useEffect(() => {
     const storeLogInInfo = localStorage.getItem("isLoggedIn");
-    if (storeLogInInfo) {
+    if (storeLogInInfo === true) {
       getAllUsers();
       setIsSignedUp(true);
       setIsLoggedIn(true);
+    } else {
+      setIsSignedUp(false);
+      setIsLoggedIn(false);
     }
   }, []);
 
   return (
     <div className='App'>
       {!isSignedUp && (
-        <Card>
-          <h3>Sign up</h3>
-          <SignForm userFunction={handleSignUpUser} buttonText={"Sign Up"} />
+        <Card style={{width: "500px"}}>
+          <h3>Create an account</h3>
+          <SignForm userFunction={handleSignUpUser} buttonText={"Sign Up"} signUp={true}/>
         </Card>
       )}
       {isSignedUp && !isLoggedIn && (
-        <Card>
+        <Card style={{width: "500px"}}>
           <h3>Log in</h3>
-          <SignForm userFunction={handleLogInUser} buttonText={"Log In"} />
+          <SignForm userFunction={handleLogInUser} buttonText={"Log In"} signUp={false}/>
         </Card>
       )}
       {isLoggedIn && (
         <Fragment>
+          <Header user={user} logout={handleLogOutUser}/>
           <Card>
             <NotesForm add={addNote} />
           </Card>
@@ -196,10 +206,12 @@ export default function App() {
         message='Sign up success!'
         onClose={handleClose}
         key={vertical + horizontal}
-        autoHideDuration={3000}
+        autoHideDuration={2000}
         ContentProps={{
           sx: {
             background: "rgb(46,125,50)",
+            display: 'block',
+            textAlign: "center"
           },
         }}
       />
