@@ -33,7 +33,7 @@ const NotesForm = ({ add, ...props }) => {
     },
   };
   return (
-    <form autocomplete='off' className={classes.form} onSubmit={addNewNote}>
+    <form autoComplete='off' className={classes.form} onSubmit={addNewNote}>
       <TextField
         fullWidth
         value={inputValue}

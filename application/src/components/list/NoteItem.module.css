@@ -1,6 +1,7 @@
 .item {
-  margin-top: 1.5rem;
-    width: 100%;
+  margin: 1.5rem 0;
+    width: 100%; 
+    max-width: 100%;
   }
   
   .general {
@@ -11,7 +12,7 @@
 
   .item-name {
     width: 100%;
-    max-width: 400px;
+    max-width: 50%;
     height: 100%;
     word-wrap: break-word;
   }
@@ -35,3 +36,8 @@
     margin-top: -1rem;
   }
   
+  @media (max-width: 410px) {
+    .item-name {
+      width: 33%;
+    }
+  }

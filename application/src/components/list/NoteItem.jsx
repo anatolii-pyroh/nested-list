@@ -10,6 +10,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import classes from "./NoteItem.module.css";
 import NotesForm from "../form/NotesForm";
 import Card from "../UI/Card";
+import ModalWindow from "../UI/ModalWindow";
 
 const NoteItem = ({
   index,
@@ -23,8 +24,15 @@ const NoteItem = ({
   removeSubnote,
   ...props
 }) => {
+  // state for modal window
+  const [openModal, setOpenModal] = useState(false);
+  // states for show/hide new note form and subnotes list
   const [openForm, setOpenForm] = useState(false);
   const [showSubnotes, setShowSubnotes] = useState(false);
+  // fucntions to show/hide modal
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+  // fucntions to show/hide new note form and subnote slist
   const open = () => {
     setOpenForm(!openForm);
   };
@@ -83,102 +91,105 @@ const NoteItem = ({
     <React.Fragment>
       <li className={classes.item}>
         <Card>
-        {/* div that contains item name and buttons */}
-        <div className={classes.general}>
-          <div className={classes["item-name"]}>
-            <span>{index + 1}. </span>
-            {note.name}
-          </div>
-          <div className={classes["item-buttons"]}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                gap: "10px",
-              }}
-            >
-              {/* getting item index and set icons depends on what item index is */}
-              {/* move item up */}
-              {isFirst && (
-                <IconButton aria-label='moveUp' onClick={() => moveNote("up")}>
-                  <ArrowUpwardIcon />
+          {/* div that contains item name and buttons */}
+          <div className={classes.general}>
+            <div className={classes["item-name"]}>
+              <span>{index + 1}. </span>
+              {note.name}
+            </div>
+            <div className={classes["item-buttons"]}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "5px",
+                }}
+              >
+                {/* getting item index and set icons depends on what item index is */}
+                {/* move item up */}
+                {isFirst && (
+                  <IconButton
+                    aria-label='moveUp'
+                    onClick={() => moveNote("up")}
+                  >
+                    <ArrowUpwardIcon />
+                  </IconButton>
+                )}
+                {/* move item down */}
+                {isLast && (
+                  <IconButton
+                    aria-label='moveDown'
+                    onClick={() => moveNote("down")}
+                  >
+                    <ArrowDownwardIcon />
+                  </IconButton>
+                )}
+                {/* show/hide subnotes */}
+                {note.subnotes.length > 0 && (
+                  <React.Fragment>
+                    {!showSubnotes && (
+                      <IconButton aria-label='show' onClick={show}>
+                        <VisibilityIcon />
+                      </IconButton>
+                    )}
+                    {showSubnotes && (
+                      <IconButton aria-label='show' onClick={show}>
+                        <VisibilityOffIcon />
+                      </IconButton>
+                    )}
+                  </React.Fragment>
+                )}
+                <IconButton aria-label='add' onClick={open}>
+                  <AddIcon />
                 </IconButton>
-              )}
-              {/* move item down */}
-              {isLast && (
-                <IconButton
-                  aria-label='moveDown'
-                  onClick={() => moveNote("down")}
-                >
-                  <ArrowDownwardIcon />
-                </IconButton>
-              )}
-              {/* show/hide subnotes */}
-              {note.subnotes.length > 0 && (
-                <React.Fragment>
-                  {!showSubnotes && (
-                    <IconButton aria-label='show' onClick={show}>
-                      <VisibilityIcon />
-                    </IconButton>
-                  )}
-                  {showSubnotes && (
-                    <IconButton aria-label='show' onClick={show}>
-                      <VisibilityOffIcon />
-                    </IconButton>
-                  )}
-                </React.Fragment>
-              )}
-              <IconButton aria-label='add' onClick={open}>
-                <AddIcon />
-              </IconButton>
 
-              <IconButton
-                aria-label='edit'
-                onClick={() => editName(index, "newNoteName")}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton aria-label='delete' onClick={() => remove(note.id)}>
-                <DeleteForeverIcon />
-              </IconButton>
-              {note.subnotes && note.subnotes.length > 0 && (
-              <Button
-                type='button'
-                onClick={() => removeSubnote(index)}
-              >
-                Remove subnotes
-              </Button>
-            )}
-            </Box>
+                <IconButton
+                  aria-label='edit'
+                  onClick={handleOpen}
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton aria-label='delete' onClick={() => remove(note.id)}>
+                  <DeleteForeverIcon />
+                </IconButton>
+                {note.subnotes && note.subnotes.length > 0 && (
+                  <Button type='button' onClick={() => removeSubnote(index)}>
+                    Remove subnotes
+                  </Button>
+                )}
+              </Box>
+            </div>
           </div>
-        </div>
-        {openForm && <NotesForm add={addNote} />}
-        {showSubnotes && (
-          <React.Fragment>
-            <ul>
-              {note.subnotes.map((subnote, index) => (
-                  <NoteItem
-                  key={subnote.id}
-                    index={index}
-                    note={subnote}
-                    isFirst={index !== 0 ? true : false}
-                    isLast={
-                      note.subnotes && note.subnotes.length - 1 !== index
-                        ? true
-                        : false
-                    }
-                    move={moveSubnote}
-                    update={updateNote}
-                    editName={() => editSubnoteName(index, "newSubnoteName")}
-                    remove={() => removeNote(subnote.id)}
-                    removeSubnote={() => removeSubnoteItsSubnotes(index)}
-                  />
-              ))}
-            </ul>
-          </React.Fragment>
-        )}
+          {openForm && <NotesForm add={addNote} />}
         </Card>
       </li>
+      {showSubnotes && (
+        <React.Fragment>
+          <ul style={{ margin: "0 0 0 3rem" }}>
+            {note.subnotes.map((subnote, index) => (
+              <NoteItem
+                key={subnote.id}
+                index={index}
+                note={subnote}
+                isFirst={index !== 0 ? true : false}
+                isLast={
+                  note.subnotes && note.subnotes.length - 1 !== index
+                    ? true
+                    : false
+                }
+                move={moveSubnote}
+                update={updateNote}
+                editName={editSubnoteName}
+                remove={() => removeNote(subnote.id)}
+                removeSubnote={() => removeSubnoteItsSubnotes(index)}
+              />
+            ))}
+          </ul>
+        </React.Fragment>
+      )}
+
+      {/* modal window when edit item name*/}
+      <ModalWindow openModal={openModal} handleClose={handleClose} edit={editName} index={index}/>
     </React.Fragment>
   );
 };
