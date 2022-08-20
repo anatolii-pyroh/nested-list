@@ -1,16 +1,4 @@
 {
   "users": [
-    {
-      "id": "3cee2dc5-cc81-4476-8597-13cdf57db281",
-      "email": "ant@gmail.com",
-      "password": "123456",
-      "notes": []
-    },
-    {
-      "id": "9c937bbc-5a7d-4b6b-9a78-a0d37c265b0c",
-      "email": "ant@gmail.com",
-      "password": "123456",
-      "notes": []
-    }
   ]
 }
