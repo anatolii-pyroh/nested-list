@@ -197,7 +197,7 @@ export default function App() {
           </main>
         </Fragment>
       )}
-      {/* success sign up alert */}
+      {/* success/fail alert message when sign up/log in */}
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
         open={open}
