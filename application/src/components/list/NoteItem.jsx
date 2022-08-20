@@ -31,7 +31,7 @@ const NoteItem = ({
   // fucntions to show/hide modal
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
-  // fucntions to show/hide new note form and subnote slist
+  // fucntions to show/hide new note form and subnotes list
   const open = () => {
     setOpenForm(!openForm);
   };
@@ -122,7 +122,7 @@ const NoteItem = ({
                     <ArrowDownwardIcon />
                   </IconButton>
                 )}
-                {/* show/hide subnotes */}
+                {/* show/hide subnotes icon with length counter */}
                 {note.subnotes.length > 0 && (
                   <React.Fragment>
                     {!showSubnotes && (

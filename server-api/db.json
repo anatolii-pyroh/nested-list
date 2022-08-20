@@ -1,22 +1,16 @@
 {
   "users": [
     {
-      "id": "df76dfbc-e8c2-4c3a-aa77-e175a73b289d",
-      "email": "anatolii@gmail.com",
+      "id": "3cee2dc5-cc81-4476-8597-13cdf57db281",
+      "email": "ant@gmail.com",
       "password": "123456",
-      "notes": [
-        {
-          "id": "5f9e6f17-8977-4694-b265-dbb6e70a423d",
-          "name": "21321",
-          "subnotes": [
-            {
-              "id": "f0813179-72d7-4b6b-8d9a-6151da969e47",
-              "name": "2321",
-              "subnotes": []
-            }
-          ]
-        }
-      ]
+      "notes": []
+    },
+    {
+      "id": "9c937bbc-5a7d-4b6b-9a78-a0d37c265b0c",
+      "email": "ant@gmail.com",
+      "password": "123456",
+      "notes": []
     }
   ]
 }

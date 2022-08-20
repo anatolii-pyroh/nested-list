@@ -19,14 +19,14 @@ export default function App() {
     password: "",
     notes: [],
   });
-  // states for alert message when user sign up
+  // states for alert message for success sign up or fail login
   const [alertState, setAlertState] = useState({
     open: false,
     vertical: "top",
     horizontal: "center",
   });
-  const { vertical, horizontal, open } = alertState;
-
+  const { vertical, horizontal, open } = alertState; 
+  const [isSuccess, setIsSuccess] = useState(true)
   // recieve user info from api
   const recieveUsers = async () => {
     const response = await api.get("/users");
@@ -63,9 +63,14 @@ export default function App() {
     if (email === user.email && password === user.password) {
       console.log("Logged in");
       setIsLoggedIn(true);
+      setIsSuccess(true)
       localStorage.setItem("isLoggedIn", true);
     } else {
-      console.log("Wrong inputs");
+      setIsSuccess(false)
+      handleClick({
+        vertical: "top",
+        horizontal: "center",
+      });
     }
   };
   const handleLogOutUser = () => {
@@ -196,13 +201,13 @@ export default function App() {
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
         open={open}
-        message='Sign up success!'
+        message={isSuccess ? 'Sign up success!' : "Wrong email or password, try again."}
         onClose={handleClose}
         key={vertical + horizontal}
         autoHideDuration={2000}
         ContentProps={{
           sx: {
-            background: "rgb(46,125,50)",
+            background: isSuccess ? "rgb(46,125,50)" : "rgb(211,47,47)",
             display: 'block',
             textAlign: "center"
           },

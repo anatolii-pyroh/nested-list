@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 const NotesForm = ({ add }) => {
   const [inputValue, setInputValue] = useState("");
 
-  // add new note by checking if input is not empty
+  // add new note when user press submit
   const addNewNote = (e) => {
     e.preventDefault();
     if (inputValue.trim().length > 0) {
@@ -21,6 +21,7 @@ const NotesForm = ({ add }) => {
     return;
   };
 
+  // input style
   const style = {
     mt: 0.5,
     "& label.Mui-focused": {
