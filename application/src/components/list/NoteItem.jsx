@@ -23,15 +23,13 @@ const NoteItem = ({
   remove,
   removeSubnote,
 }) => {
-  // state for modal window
   const [openModal, setOpenModal] = useState(false);
-  // states for show/hide new note form and subnotes list
   const [openForm, setOpenForm] = useState(false);
   const [showSubnotes, setShowSubnotes] = useState(false);
-  // fucntions to show/hide modal
+
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
-  // fucntions to show/hide new note form and subnotes list
+
   const open = () => {
     setOpenForm(!openForm);
   };

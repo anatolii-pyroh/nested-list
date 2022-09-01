@@ -17,7 +17,6 @@ const SignForm = ({ userFunction, buttonText, signUp }) => {
     },
   });
 
-  // input style
   const style = {
     my: 0.3,
     "& label.Mui-focused": {
@@ -29,7 +28,7 @@ const SignForm = ({ userFunction, buttonText, signUp }) => {
       }
     }
   }
-  // check if inputs are valid when error message is true
+
   const inputsNotValid = errors.email?.message || errors.password?.message;
 
   return (

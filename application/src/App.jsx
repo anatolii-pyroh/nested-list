@@ -19,7 +19,7 @@ export default function App() {
     password: "",
     notes: [],
   });
-  // states for alert message for success sign up or fail login
+
   const [alertState, setAlertState] = useState({
     open: false,
     vertical: "top",
@@ -27,12 +27,13 @@ export default function App() {
   });
   const { vertical, horizontal, open } = alertState; 
   const [isSuccess, setIsSuccess] = useState(true)
+
   // recieve user info from api
   const recieveUsers = async () => {
     const response = await api.get("/users");
     return response.data;
   };
-  // if true, get user its info from api and set notes its info from user.notes in api
+  // if true, get user info from api
   const getAllUsers = async () => {
     const userApiInfo = await recieveUsers();
     if (userApiInfo) {
@@ -41,7 +42,7 @@ export default function App() {
       setNotes(userApiInfo?.[userApiInfo.length - 1].notes);
     }
   };
-  // set user state with random id and email+password from sign form
+  // set user state with id and email+password from sign form
   const handleSignUpUser = (email, password) => {
     setIsSignedUp(true);
     setUser({
@@ -58,7 +59,7 @@ export default function App() {
   };
 
   // check if inputs from sign form are equal inputs from login form
-  // if true, set user state in local storage
+  // if true, let user in
   const handleLogInUser = (email, password) => {
     if (email === user.email && password === user.password) {
       console.log("Logged in");
@@ -78,12 +79,10 @@ export default function App() {
     localStorage.removeItem("isLoggedIn");
   }
 
-  // add not when user press "submit"
   const addNote = async (newNote) => {
     setNotes([...notes, newNote]);
   };
 
-  // edit note when user add notes,subnotes or move them
   const updateNote = (note, index) => {
     setNotes((notes) => {
       const updState = [...notes];
@@ -91,6 +90,7 @@ export default function App() {
       return updState;
     });
   };
+  
   const editNoteName = (index, newNoteName) => {
     console.log(newNoteName);
     setNotes((notes) => {
@@ -108,7 +108,6 @@ export default function App() {
     setNotes(noteStateCopy);
   };
 
-  // remove note when user press "remove"
   const removeNote = (id) => {
     setNotes(notes.filter((note) => note.id !== id));
   };
@@ -120,7 +119,6 @@ export default function App() {
     });
   };
 
-  // successfull alert show and hide
   const handleClick = (newAlertState) => {
     setAlertState({ open: true, ...newAlertState });
   };

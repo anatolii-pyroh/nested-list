@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Modal,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Modal, TextField, Button } from "@mui/material";
 
 const ModalWindow = ({ openModal, handleClose, edit, index }) => {
   const [modalValue, setModalValue] = useState("");
   const handleSendNewNoteName = () => {
-    edit(index, modalValue);
-    handleClose();
+    if (modalValue.trim().length > 0) {
+      edit(index, modalValue);
+      handleClose();
+    } else {
+      return;
+    }
   };
   // modal window and input styles
   const style = {
@@ -55,7 +53,7 @@ const ModalWindow = ({ openModal, handleClose, edit, index }) => {
           Enter new name of note
         </Typography>
         <TextField
-        autoComplete="off"
+          autoComplete='off'
           fullWidth
           label='Name'
           size='small'

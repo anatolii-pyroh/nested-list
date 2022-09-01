@@ -21,7 +21,6 @@ const NotesForm = ({ add }) => {
     return;
   };
 
-  // input style
   const style = {
     mt: 0.5,
     "& label.Mui-focused": {
