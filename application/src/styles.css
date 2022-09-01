@@ -1,7 +1,7 @@
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css");
 
 :root {
-  --purple: rgb(103, 46, 227)
+  --purple: #672ee3;
 }
 #root {
   max-width: 100%;
@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 body {
-  background-color: rgb(239, 238, 245);
+  background-color: #efeef5;
   display: flex;
   justify-content: center;
   overflow-x: visible;
@@ -39,15 +39,14 @@ body {
   background-color: rgb(103,46,227) !important;
 } */
 
-
 button {
-  color: rgb(103,46,227) !important;
+  color: var(--purple) !important;
   background: transparent !important;
   border: none !important;
 }
 
 button:hover {
-  color: rgb(142, 107, 202) !important;
+  color: #8e6bca !important;
 }
 
 button:focus {

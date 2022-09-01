@@ -6,7 +6,7 @@ header {
     height: 80px;
     padding: 0 5rem;
     color: white;
-    background-color: rgb(103,46,227);
+    background-color: var(--purple);
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -24,11 +24,11 @@ const NotesForm = ({ add }) => {
   const style = {
     mt: 0.5,
     "& label.Mui-focused": {
-      color: "rgb(123, 76, 204)",
+      color: "#7b4ccc",
     },
     "& .MuiOutlinedInput-root": {
       "&.Mui-focused fieldset": {
-        borderColor: "rgb(123, 76, 204)",
+        borderColor: "#7b4ccc",
       },
     },
   };
@@ -51,10 +51,10 @@ const NotesForm = ({ add }) => {
           marginBottom: 1,
           width: "100px",
           color: "white !important",
-          backgroundColor: "rgb(103,46,227) !important",
+          backgroundColor: "#672ee3 !important",
           ":hover": {
             color: "white !important",
-            backgroundColor: "rgb(128, 84, 202) !important"
+            backgroundColor: "#8e6bca !important"
           }
         }}
       >

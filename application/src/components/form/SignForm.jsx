@@ -29,11 +29,11 @@ const SignForm = ({
   const style = {
     my: 0.3,
     "& label.Mui-focused": {
-      color: "rgb(123, 76, 204)",
+      color: "#672ee3",
     },
     "& .MuiOutlinedInput-root": {
       "&.Mui-focused fieldset": {
-        borderColor: "rgb(123, 76, 204)",
+        borderColor: "#672ee3",
       },
     },
   };
