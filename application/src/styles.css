@@ -1,5 +1,8 @@
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css");
 
+:root {
+  --purple: rgb(103, 46, 227)
+}
 #root {
   max-width: 100%;
 }

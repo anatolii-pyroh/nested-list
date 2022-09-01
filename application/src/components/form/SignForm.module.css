@@ -1,12 +1,28 @@
-.privacy_text {
-    margin-top: 0.5rem;
-    margin-bottom: -0.5rem;
-    font-weight: bold;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: rgb(184, 182, 182);
+.privacy-text {
+  margin-top: 0.5rem;
+  margin-bottom: -0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #b8b6b6;
 }
 
-.privacy_text span {
-    color: rgb(103,46,227);
+.privacy-text a {
+  color: var(--purple);
+}
+
+.sign-up-text {
+  margin-top: 0.5rem;
+  margin-bottom: -0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.sign-up-text span {
+  color: var(--purple);
+  cursor: pointer;
+}
+
+.sign-up-text span:hover {
+  text-decoration: underline;
 }

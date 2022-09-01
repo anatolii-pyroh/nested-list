@@ -141,7 +141,12 @@ const NoteItem = ({
                   </React.Fragment>
                 )}
                 <IconButton aria-label='add' onClick={open}>
-                  <AddIcon />
+                  <AddIcon
+                    sx={{
+                      transform: openForm ? "rotate(45deg)" : "rotate(0deg)",
+                      transition: "all .4s ease",
+                    }}
+                  />
                 </IconButton>
 
                 <IconButton aria-label='edit' onClick={handleOpen}>

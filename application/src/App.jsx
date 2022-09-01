@@ -25,8 +25,8 @@ export default function App() {
     vertical: "top",
     horizontal: "center",
   });
-  const { vertical, horizontal, open } = alertState; 
-  const [isSuccess, setIsSuccess] = useState(true)
+  const { vertical, horizontal, open } = alertState;
+  const [isSuccess, setIsSuccess] = useState(true);
 
   // recieve user info from api
   const recieveUsers = async () => {
@@ -64,10 +64,10 @@ export default function App() {
     if (email === user.email && password === user.password) {
       console.log("Logged in");
       setIsLoggedIn(true);
-      setIsSuccess(true)
+      setIsSuccess(true);
       localStorage.setItem("isLoggedIn", true);
     } else {
-      setIsSuccess(false)
+      setIsSuccess(false);
       handleClick({
         vertical: "top",
         horizontal: "center",
@@ -75,9 +75,9 @@ export default function App() {
     }
   };
   const handleLogOutUser = () => {
-    setIsLoggedIn(false)
+    setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
-  }
+  };
 
   const addNote = async (newNote) => {
     setNotes([...notes, newNote]);
@@ -90,7 +90,7 @@ export default function App() {
       return updState;
     });
   };
-  
+
   const editNoteName = (index, newNoteName) => {
     console.log(newNoteName);
     setNotes((notes) => {
@@ -160,36 +160,46 @@ export default function App() {
   return (
     <div className='App'>
       {!isSignedUp && (
-        <Card style={{width: "500px", alignSelf: "center"}}>
+        <Card style={{ width: "500px", alignSelf: "center" }}>
           <h3>Create an account</h3>
-          <SignForm userFunction={handleSignUpUser} buttonText={"Sign Up"} signUp={true}/>
+          <SignForm
+            userFunction={handleSignUpUser}
+            buttonText={"Sign Up"}
+            signUp={true}
+          />
         </Card>
       )}
       {isSignedUp && !isLoggedIn && (
-        <Card style={{width: "500px", alignSelf: "center"}}>
+        <Card style={{ width: "500px", alignSelf: "center" }}>
           <h3>Log in</h3>
-          <SignForm userFunction={handleLogInUser} buttonText={"Log In"} signUp={false}/>
+          <SignForm
+            userFunction={handleLogInUser}
+            buttonText={"Log In"}
+            signUp={false}
+            setIsLoggedIn={setIsLoggedIn}
+            setIsSignedUp={setIsSignedUp}
+          />
         </Card>
       )}
       {isLoggedIn && (
         <Fragment>
-          <Header user={user} logout={handleLogOutUser}/>
-            <NotesForm add={addNote}/>
+          <Header user={user} logout={handleLogOutUser} />
+          <NotesForm add={addNote} />
           <main>
             <ul>
               {notes.map((note, i) => (
-                  <NoteItem
+                <NoteItem
                   key={note.id}
-                    index={i}
-                    note={note}
-                    isFirst={i !== 0 ? true : false}
-                    isLast={notes.length - 1 !== i ? true : false}
-                    move={moveNote}
-                    update={updateNote}
-                    editName={editNoteName}
-                    remove={removeNote}
-                    removeSubnote={removeSubnote}
-                  />
+                  index={i}
+                  note={note}
+                  isFirst={i !== 0 ? true : false}
+                  isLast={notes.length - 1 !== i ? true : false}
+                  move={moveNote}
+                  update={updateNote}
+                  editName={editNoteName}
+                  remove={removeNote}
+                  removeSubnote={removeSubnote}
+                />
               ))}
             </ul>
           </main>
@@ -199,15 +209,17 @@ export default function App() {
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
         open={open}
-        message={isSuccess ? 'Sign up success!' : "Wrong email or password, try again."}
+        message={
+          isSuccess ? "Sign up success!" : "Wrong email or password, try again."
+        }
         onClose={handleClose}
         key={vertical + horizontal}
         autoHideDuration={2000}
         ContentProps={{
           sx: {
             background: isSuccess ? "rgb(46,125,50)" : "rgb(211,47,47)",
-            display: 'block',
-            textAlign: "center"
+            display: "block",
+            textAlign: "center",
           },
         }}
       />
